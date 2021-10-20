@@ -1,5 +1,4 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { Provider, DefaultTheme } from 'react-native-paper';
 
 

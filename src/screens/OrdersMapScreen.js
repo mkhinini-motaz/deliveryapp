@@ -23,26 +23,22 @@ export default function OrdersMapScreen(props) {
 
     return (
         <View style={{ flex: 1 }}>
-            <Header headerText='Tech Stack' />
-            <SafeAreaView>
-
-                <MapView initialRegion={{
-                    latitude: 35.734103,
-                    longitude: 10.583407,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}>
-                    <MapViewDirections
-                        origin={origin}
-                        destination={destination}
-                        wayPoints={waypoints}
-                        apikey={GOOGLE_MAPS_APIKEY}
-                    />
-                    <Marker coordinate={origin} key={'origin'}  title={'origin'}  />
-                    <Marker coordinate={destination} key={'destination'}  title={'destination'}  />
-                    {waypoints.map(waypoint => <Marker coordinate={waypoint} key={waypoint.title}  title={waypoint.title}  />)}
-                </MapView>
-            </SafeAreaView>
+            <MapView initialRegion={{
+                latitude: 35.734103,
+                longitude: 10.583407,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }}>
+                <MapViewDirections
+                    origin={origin}
+                    destination={destination}
+                    wayPoints={waypoints}
+                    apikey={GOOGLE_MAPS_APIKEY}
+                />
+                <Marker coordinate={origin} key={'origin'}  title={'origin'}  />
+                <Marker coordinate={destination} key={'destination'}  title={'destination'}  />
+                {waypoints.map(waypoint => <Marker coordinate={waypoint} key={waypoint.name}  title={waypoint.name}  />)}
+            </MapView>
         </View>
     );
 }

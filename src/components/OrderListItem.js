@@ -7,21 +7,33 @@ import {translateFromObject} from "../i18n";
 export default function OrderListItem(props) {
     const { products, client } = props.order;
     return (
-        <List.Item
-            title={client.first_name + ' ' + client.last_name}
-            description={
-                products.map(product => <>
+        <View style={styles.container}>
+            <Text>aaa</Text>
+            <View style={styles.title}>
+                <Text>{client.first_name + ' ' + client.last_name}</Text>
+            </View>
+            {
+                products.map(product => <View style={styles.listItemDescription}>
                     <Text>{product.product_count}</Text>
                     <Text>{translateFromObject(product.name, 'fr')}</Text>
                     <Text>{optionGroupsOutput(product.option_groups)}</Text>
-                </>)
-
+                </View>)
             }
-            left={props => <List.Icon {...props} icon="folder" />}
-        />
+
+            <Text>bbb</Text>
+
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    title: {
+        flex: 1,
+    },
+    listItemDescription: {
 
+    },
 });

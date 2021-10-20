@@ -7,33 +7,31 @@ import {attemptShopUserLogin} from "../store/actions";
 
 export default function LoginScreen(props) {
     const dispatch = useDispatch();
-    const [phone, setPhone] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [phone, setPhone] = React.useState('+21611111111');
+    const [password, setPassword] = React.useState('azerty');
 
     return (
         <View style={styles.screen}>
-            <KeyboardAwareScrollView>
-                <View>
-                    <TextInput
-                        label="Phone"
-                        value={phone}
-                        onChangeText={setPhone}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        label="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry={true}
-                    />
-                </View>
-                <View>
-                    <Button mode="contained" onPress={() => dispatch(attemptShopUserLogin({ phone, password }))}>
-                        Login
-                    </Button>
-                </View>
-            </KeyboardAwareScrollView>
+            <View style={styles.section}>
+                <TextInput
+                    label="Phone"
+                    value={phone}
+                    onChangeText={setPhone}
+                />
+            </View>
+            <View style={styles.section}>
+                <TextInput
+                    label="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={true}
+                />
+            </View>
+            <View style={styles.section}>
+                <Button mode="contained" onPress={() => dispatch(attemptShopUserLogin({ phone, password }))}>
+                    Login
+                </Button>
+            </View>
         </View>
     );
 }
@@ -43,5 +41,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column',
+    },
+    section: {
+        flex: 1,
+        width: '80%'
     }
 });

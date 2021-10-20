@@ -16,8 +16,7 @@ export const availableLangs = {
     ar: { code: 'ar', writeFrom: 'right' },
 };
 
-const navigatorLang = window.navigator.language.substr(0, 2);
-export const defaultLang = availableLangs[navigatorLang] || availableLangs.fr;
+export const defaultLang = availableLangs.fr;
 
 /**
  * @see {i18n folder} function requires a translations object,
@@ -49,10 +48,7 @@ export function translate(translationKey, languageCode, textOnly = false, params
         translatedValue = translatedValue.replace('${' + paramName + '}', paramI18n);
     }
 
-    if (textOnly) {
-        return translatedValue;
-    }
-    return <span className={'translated_' + languageCode}>{translatedValue}</span>;
+    return translatedValue;
 }
 
 /**
@@ -69,10 +65,5 @@ export function translateFromObject(translationsObject, languageCode, textOnly =
         return '';
     }
 
-    const result = translationsObject[languageCode] || translationsObject[Object.keys(translationsObject)[0]];
-    if (textOnly) {
-        return result;
-    }
-
-    return <span className={'translated_' + languageCode}>{result}</span>;
+    return translationsObject[languageCode] || translationsObject[Object.keys(translationsObject)[0]];
 }
