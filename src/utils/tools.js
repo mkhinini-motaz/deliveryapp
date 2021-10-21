@@ -13,3 +13,16 @@ export const optionGroupsOutput = (optionGroups, selectedLang) => {
         }).join(', ')
     ).join(', ')
 };
+
+/**
+ *
+ * @param order {object}
+ * @returns {{latitude: *, id: *, longitude: *}}
+ */
+export const orderToCoordinates = (order) => {
+    return {
+        id: order.id,
+        latitude: parseFloat(order.delivery_latitude),
+        longitude: parseFloat(order.delivery_longitude),
+        name: order.client ? order.client.first_name + ' ' + order.client.last_name : '' };
+};

@@ -57,7 +57,6 @@ export function attemptShopUserLogin({ phone, password })  {
                 })
         }).catch((error) => {
 // TODO: snackbar message
-console.log({error: {...error}})
             dispatch(setShopUserLoginIsLoading(false));
         })
     }
