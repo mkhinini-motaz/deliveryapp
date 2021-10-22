@@ -10,8 +10,8 @@ const Tab = createBottomTabNavigator();
 export default function AuthenticatedNavigator(props) {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="OrdersMap" component={OrdersMapScreen} />
             <Tab.Screen name="OrdersList" component={OrdersListScreen} />
+            <Tab.Screen name="OrdersMap" component={OrdersMapScreen} />
         </Tab.Navigator>
     );
 }
