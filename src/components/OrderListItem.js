@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet, Linking } from "react-native";
 import { Divider, Text } from 'react-native-paper';
-import {optionGroupsOutput} from "../utils";
+import { formatPhone, optionGroupsOutput } from "../utils";
 import {translateFromObject} from "../i18n";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,11 +14,11 @@ export default function OrderListItem(props) {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
-                <Text>{client.first_name + ' ' + client.last_name}</Text>
+                <Text style={styles.name}>{client.first_name + ' ' + client.last_name}</Text>
                 <TouchableWithoutFeedback onPress={onPhoneClick}>
                     <View style={styles.clientPhoneContainer}>
-                        <Icon name={'phone-square'} size={25} color={'green'} />
-                        <Text style={styles.clientPhone}>{client.phone}</Text>
+                        <Icon name={'phone'} size={25} color={'green'} />
+                        <Text style={styles.clientPhone}>{formatPhone(client.phone)}</Text>
                     </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -47,12 +47,16 @@ const styles = StyleSheet.create({
     title: {
         flex: 1,
     },
+    name: {
+        fontSize: 20,
+    },
     clientPhoneContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 5,
     },
     clientPhone: {
+        fontSize: 20,
         marginHorizontal: 8,
     },
     listItemProduct: {
@@ -60,6 +64,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     listItemProductName: {
+        fontSize: 20,
         marginBottom: 5,
     },
 });

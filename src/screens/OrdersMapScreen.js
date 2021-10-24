@@ -5,6 +5,8 @@ import MapViewDirections from "react-native-maps-directions";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrders} from "../store/actions";
 import {orderToCoordinates} from "../utils";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { PRIMARY_COLOR } from "../constants";
 
 export default function OrdersMapScreen(props) {
     const dispatch = useDispatch();
@@ -53,8 +55,8 @@ console.log('######### :   ', {destination, waypoints})
                     waypoints={waypoints}
                     apikey={GOOGLE_MAPS_APIKEY}
                 />
-                <Marker coordinate={origin} key={'origin'}  title={'origin'}  />
-                <Marker coordinate={destination} key={'destination'}  title={destination.name}  />
+                <Marker coordinate={origin} key={'origin'}  title={'origin'} pinColor={PRIMARY_COLOR} />
+                <Marker coordinate={destination} key={'destination'} title={destination.name} />
                 {waypoints.map(waypoint => <Marker coordinate={waypoint} key={waypoint.name}  title={waypoint.name}  />)}
 
             </MapView>
