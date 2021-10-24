@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 
 import AuthenticatedNavigator from "./AuthenticatedNavigator";
 import LoginNavigator from "./LoginNavigator";
-
+import { THEME } from "../constants";
 export default function RootNavigator(props) {
     const isLoggedIn = useSelector(state => state.UserReducer.isLoggedIn);
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={THEME}>
             { isLoggedIn ?
                 <AuthenticatedNavigator /> :
                 <LoginNavigator />
