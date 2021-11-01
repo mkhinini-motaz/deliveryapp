@@ -49,13 +49,14 @@ export function attemptShopUserLogout() {
 export function attemptShopUserLogin({ phone, password })  {
     return function(dispatch) {
         dispatch(setShopUserLoginIsLoading(true));
-        axios.post(BASE_SHOP_API_URL + '/login', { phone, password }).then(response => {
-            AsyncStorage.setItem('shop_user_access_token', response.data.data.access_token)
-                .then(() => {
-                    dispatch(shopUserLoginSuccess(response.data.data));
-                    dispatch(setShopUserLoginIsLoading(false));
-                })
-        }).catch((error) => {
+        axios.post(BASE_SHOP_API_URL + '/login', { phone, password })
+            .then(response => {
+                AsyncStorage.setItem('shop_user_access_token', response.data.data.access_token)
+                    .then(() => {
+                        dispatch(shopUserLoginSuccess(response.data.data));
+                        dispatch(setShopUserLoginIsLoading(false));
+                    });
+            }).catch((error) => {
 // TODO: snackbar message
             dispatch(setShopUserLoginIsLoading(false));
         })
@@ -68,7 +69,6 @@ export function fetchShopUserProfile()  {
             axios.get(BASE_SHOP_API_URL + '/profile', { headers: { Authorization: 'Bearer ' + accessToken } }).then(response => {
                 dispatch(shopUserLoginSuccess(response.data.data));
             });
-
         });
     }
 }

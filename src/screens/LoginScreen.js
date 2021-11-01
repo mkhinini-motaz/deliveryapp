@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from "react-redux";
-import {attemptShopUserLogin} from "../store/actions";
+import { useDispatch } from "react-redux";
+import { attemptShopUserLogin } from "../store/actions";
 
 export default function LoginScreen(props) {
     const dispatch = useDispatch();
@@ -13,6 +12,7 @@ export default function LoginScreen(props) {
     return (
         <View style={styles.screen}>
             <View style={styles.section}>
+                {/* TODO: translate label */}
                 <TextInput
                     label="Phone"
                     value={phone}
@@ -20,6 +20,7 @@ export default function LoginScreen(props) {
                 />
             </View>
             <View style={styles.section}>
+                {/* TODO: translate label */}
                 <TextInput
                     label="Password"
                     value={password}
@@ -29,6 +30,7 @@ export default function LoginScreen(props) {
             </View>
             <View style={styles.section}>
                 <Button mode="contained" onPress={() => dispatch(attemptShopUserLogin({ phone, password }))}>
+                    {/* TODO: translate */}
                     Login
                 </Button>
             </View>

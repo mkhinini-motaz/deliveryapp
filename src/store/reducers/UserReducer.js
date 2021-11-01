@@ -2,8 +2,8 @@ import { SET_SHOP_USER_LOGIN_IS_LOADING, SET_SHOP_USER_PROFILE_UPDATE_IS_LOADING
 
 const initialUserReducerState = {
     authShopUser: { },
-    isLoggedIn:              false,
-    shopUserLoginIsLoading:  false,
+    isLoggedIn: false,
+    shopUserLoginIsLoading: false,
     shopUserLogoutIsLoading: false,
     shopUserProfileUpdateIsLoading: false,
 };
