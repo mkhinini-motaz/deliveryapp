@@ -26,3 +26,12 @@ export const orderToCoordinates = (order) => {
         longitude: parseFloat(order.delivery_longitude),
         name: order.client ? order.client.first_name + ' ' + order.client.last_name : '' };
 };
+
+/**
+ *
+ * @param phone {string}
+ * @returns {string}
+ */
+export const formatPhone = (phone) => { // TODO: make international
+    return phone.replace(/^(\+216)([0-9]{2})([0-9]{3})([0-9]{3})$/, '$1 $2 $3 $4');
+};

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import io from "socket.io-client";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import OrdersListScreen from "../screens/OrdersListScreen";
 import OrdersMapScreen from "../screens/OrdersMapScreen";
@@ -25,9 +26,35 @@ export default function AuthenticatedNavigator(props) {
         });
 
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="OrdersList" component={OrdersListScreen} />
-            <Tab.Screen name="OrdersMap" component={OrdersMapScreen} />
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarLabelStyle: { fontSize: 15 },
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+                    switch (route.name) {
+                        case 'OrdersList':
+                            iconName = focused ? 'file-tray-stacked' : 'file-tray-stacked-outline';
+                            break;
+                        case 'OrdersMap':
+                            iconName = focused ? 'map' : 'map-outline';
+                            break;
+                        default:
+                            return '';
+                    }
+
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                }
+            })
+        }>
+            <Tab.Screen name="OrdersList"
+                        component={OrdersListScreen}
+                        options={{ title: 'Commandes' }} // TODO: translate
+
+            />
+            <Tab.Screen name="OrdersMap"
+                        component={OrdersMapScreen}
+                        options={{ title: 'Map' }} // TODO: translate
+            />
         </Tab.Navigator>
     );
 }

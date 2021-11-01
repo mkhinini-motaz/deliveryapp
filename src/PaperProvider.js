@@ -1,20 +1,12 @@
 import React from 'react';
-import { Provider, DefaultTheme } from 'react-native-paper';
+import { Provider } from 'react-native-paper';
+import { THEME } from "./constants";
 
 
 export default function PaperProvider(props) {
-    const theme = {
-        ...DefaultTheme,
-        roundness: 2,
-        colors: {
-            ...DefaultTheme.colors,
-            primary: '#3498db',
-            accent: '#f1c40f',
-        },
-    };
 
    return (
-        <Provider theme={theme}>
+        <Provider theme={THEME}>
             {props.children}
         </Provider>
     );
