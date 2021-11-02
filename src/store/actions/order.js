@@ -18,7 +18,7 @@ export function getOrders({ page = 1, perPage = 20, orderBy = 'created_at', orde
         const params = { page, perPage, orderBy, orderDirection };
 
         AsyncStorage.getItem('shop_user_access_token').then(accessToken => {
-            axios.get(BASE_SHOP_API_URL + '/order/current', { params, headers: { Authorization: 'Bearer ' + accessToken }  })
+            axios.get(BASE_SHOP_API_URL + '/shop-user/order/current', { params, headers: { Authorization: 'Bearer ' + accessToken }  })
                 .then(response => {
                     dispatch(setOrders(response.data));
                     dispatch(setOrdersAreLoading(false));

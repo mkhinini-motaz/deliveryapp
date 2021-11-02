@@ -26,11 +26,11 @@ console.log('######### :   ', {destination, waypoints})
         { latitude: 35.736455, longitude: 10.586134, name: 'ibn_sina' },
     ];
 */
-    const GOOGLE_MAPS_APIKEY = 'REDACTED';
+    const GOOGLE_MAPS_APIKEY = 'REDACTED'; // TODO: move to .env
 
     React.useEffect(() => dispatch(getOrders({})), [ dispatch ]);
 
-    if (orders.length === 0) {
+    if (ordersFromStore.length === 0) {
         return (
             <View>
                 <Text>No orders yet</Text>
