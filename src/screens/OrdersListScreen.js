@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet } from "react-native";
 import {getOrders} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
-import OrderList from "../components/OrderList";
+import OrderList from "../components/Order/OrderList";
 
 export default function OrdersListScreen(props) {
     const dispatch = useDispatch();

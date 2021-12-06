@@ -1,13 +1,14 @@
 import React, {useCallback} from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet, Linking } from "react-native";
-import { Divider, Text } from 'react-native-paper';
-import { formatPhone, optionGroupsOutput } from "../utils";
-import {translateFromObject} from "../i18n";
+import { Divider, Text, Chip } from 'react-native-paper';
+import { formatPhone, optionGroupsOutput } from "../../utils";
+import {translateFromObject} from "../../i18n";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import MoneyFormatter from "./common/MoneyFormatter";
+import MoneyFormatter from "../common/MoneyFormatter";
+import OrderStatus from "./OrderStatus";
 
 export default function OrderListItem(props) {
-    const { products, client, total_price: totalPrice } = props.order;
+    const { products, client, status, total_price: totalPrice } = props.order;
     const productsLastIndex = products.length - 1;
     const onPhoneClick = useCallback(() => Linking.openURL(`tel:${client.phone}`), [ client.phone ]);
 
@@ -15,12 +16,15 @@ export default function OrderListItem(props) {
         <View style={styles.container}>
             <View style={styles.title}>
                 <Text style={styles.name}>{client.first_name + ' ' + client.last_name}</Text>
-                <TouchableWithoutFeedback onPress={onPhoneClick}>
-                    <View style={styles.clientPhoneContainer}>
-                        <Icon name={'phone'} size={25} color={'green'} />
-                        <Text style={styles.clientPhone}>{formatPhone(client.phone)}</Text>
-                    </View>
-                </TouchableWithoutFeedback>
+                <View style={styles.secondLineContainer}>
+                    <TouchableWithoutFeedback onPress={onPhoneClick}>
+                        <View style={styles.clientPhoneContainer}>
+                            <Icon name={'phone'} size={25} color={'green'} />
+                            <Text style={styles.clientPhone}>{formatPhone(client.phone)}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <OrderStatus status={status} />
+                </View>
             </View>
 
             {products.map((product, index) =>
@@ -47,6 +51,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#acacac",
         borderRadius: 15,
+    },
+    secondLineContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     title: {
         flex: 1,
