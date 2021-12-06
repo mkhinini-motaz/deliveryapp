@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
         backgroundColor: PRIMARY_COLOR,
     },
     chipText: {
+        fontSize: 20,
     },
 });
