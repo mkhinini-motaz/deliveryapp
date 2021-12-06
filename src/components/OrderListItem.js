@@ -4,11 +4,11 @@ import { Divider, Text } from 'react-native-paper';
 import { formatPhone, optionGroupsOutput } from "../utils";
 import {translateFromObject} from "../i18n";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MoneyFormatter from "./common/MoneyFormatter";
 
 export default function OrderListItem(props) {
-    const { products, client } = props.order;
+    const { products, client, total_price: totalPrice } = props.order;
     const productsLastIndex = products.length - 1;
-
     const onPhoneClick = useCallback(() => Linking.openURL(`tel:${client.phone}`), [ client.phone ]);
 
     return (
@@ -29,6 +29,10 @@ export default function OrderListItem(props) {
                     {productsLastIndex === index ? <></> : <Divider/>}
                 </View>
             )}
+
+            <View style={styles.productPriceContainer}>
+                <MoneyFormatter style={styles.productPrice} value={totalPrice}/>
+            </View>
         </View>
     );
 }
@@ -67,4 +71,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 5,
     },
+    productPriceContainer: {
+
+    },
+    productPrice: {
+        fontSize: 25,
+        marginTop: 5,
+    }
 });

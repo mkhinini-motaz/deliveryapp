@@ -14,7 +14,6 @@ export default function OrdersMapScreen(props) {
     const orders = [...ordersFromStore];
     const destination = orders.length > 0 ? orderToCoordinates(orders.pop()) : {};
     const waypoints = orders.map(orderToCoordinates);
-console.log('######### :   ', {destination, waypoints})
     const origin = {latitude: 35.731787, longitude: 10.579060};
 //    const destination = {latitude: 35.734100, longitude: 10.583407};
 /*
@@ -41,7 +40,7 @@ console.log('######### :   ', {destination, waypoints})
     return (
         <View style={{ flex: 1 }}>
             <MapView
-                style={{ flex: 1 }}
+                style={styles.map}
                 initialRegion={{
                     latitude: 35.734103,
                     longitude: 10.583407,
@@ -55,7 +54,7 @@ console.log('######### :   ', {destination, waypoints})
                     waypoints={waypoints}
                     apikey={GOOGLE_MAPS_APIKEY}
                 />
-                <Marker coordinate={origin} key={'origin'}  title={'origin'} pinColor={PRIMARY_COLOR} />
+                <Marker coordinate={origin} key={'Ghostchef'}  title={'Ghostchef'} pinColor={PRIMARY_COLOR} />
                 <Marker coordinate={destination} key={'destination'} title={destination.name} />
                 {waypoints.map(waypoint => <Marker coordinate={waypoint} key={waypoint.name}  title={waypoint.name}  />)}
 
@@ -65,5 +64,7 @@ console.log('######### :   ', {destination, waypoints})
 }
 
 const styles = StyleSheet.create({
-
+    map: {
+        flex: 1,
+    },
 });

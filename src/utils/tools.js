@@ -24,7 +24,8 @@ export const orderToCoordinates = (order) => {
         id: order.id,
         latitude: parseFloat(order.delivery_latitude),
         longitude: parseFloat(order.delivery_longitude),
-        name: order.client ? order.client.first_name + ' ' + order.client.last_name : '' };
+        name: order.client ? order.client.first_name + ' ' + order.client.last_name : ''
+    };
 };
 
 /**
