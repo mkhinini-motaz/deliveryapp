@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../store/actions";
+import { getCurrentOrders } from "../store/actions";
 import { orderToCoordinates, requestPermissions } from "../utils";
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -31,7 +31,7 @@ export default function OrdersMapScreen(props) {
     const GOOGLE_MAPS_APIKEY = 'REDACTED'; // TODO: move to .env
 console.log('location : ', currentLocation)
     React.useEffect(() => {
-        dispatch(getOrders({}));
+        dispatch(getCurrentOrders({}));
         requestPermissions().then(() => {
             Geolocation.watchPosition(
                 (position) => {

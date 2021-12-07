@@ -10,7 +10,7 @@ import OrdersMapScreen from "../screens/OrdersMapScreen";
 import {BASE_SHOP_API_URL, BASE_WS_URL} from "../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { getOrders, shopUserLoginSuccess } from "../store/actions";
+import { getCurrentOrders, shopUserLoginSuccess } from "../store/actions";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export default function AuthenticatedNavigator(props) {
     const dispatch = useDispatch();
     const socket = io(BASE_WS_URL, { transports : ['websocket'] });
     socket.on('order_update', (payload) => {
-        dispatch(getOrders({}));
+        dispatch(getCurrentOrders({}));
     });
     AsyncStorage.getItem('shop_user_access_token')
         .then(accessToken => {

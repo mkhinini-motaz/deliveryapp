@@ -1,8 +1,9 @@
 import axios from "axios";
 
 import { BASE_SHOP_API_URL } from "../../constants";
-import { SET_ORDERS, SET_ORDERS_ARE_LOADING, } from './types';
+import { SET_ORDERS, SET_ORDERS_ARE_LOADING, SET_ORDER_STATUS_UPDATE_IS_LOADING, } from './types';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {hideOrderStatusEditDialog} from "./orderStatusEditDialog";
 
 export function setOrdersAreLoading(status) {
     return { type: SET_ORDERS_ARE_LOADING, payload: status };
@@ -12,7 +13,11 @@ export function setOrders(orders) {
     return { type: SET_ORDERS, payload: orders };
 }
 
-export function getOrders({ page = 1, perPage = 20, orderBy = 'created_at', orderDirection = 'desc' })  {
+export function setOrderStatusUpdateIsLoading(status) {
+    return { type: SET_ORDER_STATUS_UPDATE_IS_LOADING, payload: status };
+}
+
+export function getCurrentOrders({ page = 1, perPage = 20, orderBy = 'created_at', orderDirection = 'desc' })  {
     return function(dispatch) {
         dispatch(setOrdersAreLoading(true));
         const params = { page, perPage, orderBy, orderDirection };
@@ -26,6 +31,25 @@ export function getOrders({ page = 1, perPage = 20, orderBy = 'created_at', orde
                 .catch(error => {
                     dispatch(setOrdersAreLoading(false));
                 })
+            });
+    }
+}
+
+export function updateOrderStatus(orderId, status)  {
+    return function(dispatch) {
+        dispatch(setOrderStatusUpdateIsLoading(true));
+
+        const data = { status };
+        axios.post(BASE_SHOP_API_URL + '/order/' + orderId + '/status', data)
+            .then(response => {
+// TODO: snackbar
+                dispatch(getCurrentOrders());
+                dispatch(hideOrderStatusEditDialog());
+                dispatch(setOrderStatusUpdateIsLoading(false));
+            })
+            .catch(error => {
+// TODO: snackbar
+                dispatch(setOrderStatusUpdateIsLoading(false));
             });
     }
 }
