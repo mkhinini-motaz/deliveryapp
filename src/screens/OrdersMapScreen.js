@@ -1,11 +1,12 @@
 import React , { useState } from 'react';
-import {Text, View, StyleSheet, SafeAreaView} from "react-native";
-import MapView, {Marker} from "react-native-maps";
+import { Text, View, StyleSheet, } from "react-native";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-import {useDispatch, useSelector} from "react-redux";
-import {getOrders} from "../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrders } from "../store/actions";
 import { orderToCoordinates, requestPermissions } from "../utils";
-import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
 import { PRIMARY_COLOR } from "../constants";
 
@@ -58,6 +59,7 @@ console.log('location : ', currentLocation)
     return (
         <View style={{ flex: 1 }}>
             <MapView
+                provider={PROVIDER_GOOGLE}
                 style={styles.map}
                 initialRegion={{
                     latitude: 35.734103,
@@ -73,7 +75,9 @@ console.log('location : ', currentLocation)
                     apikey={GOOGLE_MAPS_APIKEY}
                 />
                 {currentLocation &&
-                    <Marker coordinate={currentLocation} key={'currentLocation'}  title={'currentLocation'} pinColor={'blue'} />
+                    <Marker coordinate={currentLocation} key={'currentLocation'} title={'currentLocation'} >
+                        <Icon name={'my-location'} size={25} color={'#187cdc'} />
+                    </Marker>
                 }
                 <Marker coordinate={origin} key={'Ghostchef'}  title={'Ghostchef'} pinColor={PRIMARY_COLOR} />
                 <Marker coordinate={destination} key={'destination'} title={destination.name} />

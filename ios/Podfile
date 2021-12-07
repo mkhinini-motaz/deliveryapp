@@ -13,6 +13,7 @@ target 'deliveryapp' do
   )
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'GoogleMaps'
 
   target 'deliveryappTests' do
     inherit! :complete
